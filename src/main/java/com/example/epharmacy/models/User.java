@@ -15,7 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -43,8 +45,8 @@ public class User {
 	    @NotEmpty(message="Confirm Password is required!")
 	    @Size(min=8, max=128, message="Confirm Password must be between 8 and 128 characters")
 	    private String confirm;
-	    @NotEmpty(message="Confirm Password is required!")
-	    @Size(min=10, max=10, message="phone number must be 10 digits")
+	    @NotNull(message="phone number must be at least 10 digits")
+	    @Min(10)
 	    private int phoneNumber;
 	    
 	    @ManyToOne(fetch = FetchType.EAGER)
