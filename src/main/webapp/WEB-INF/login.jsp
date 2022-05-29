@@ -43,6 +43,8 @@
 			<button type="submit" class="btn btn-primary btn-lg">Login</button>
 		    <form:errors path="password"></form:errors>
 		    <form:errors path="email"></form:errors>
+		    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		    
  
         </form:form>
     	</div>

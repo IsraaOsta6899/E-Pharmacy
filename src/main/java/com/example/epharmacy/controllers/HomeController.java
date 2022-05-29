@@ -1,11 +1,11 @@
 package com.example.epharmacy.controllers;
+import java.security.Principal;
 
-import java.lang.ProcessBuilder.Redirect;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -70,22 +70,27 @@ public String login(Model model,@Valid @ModelAttribute("newLogin") LoginUser new
 	         return "login.jsp";
 	     }
 	     else {
-	    	 System.out.println("kkkkkkkkkkkkkkkk");
+	    	 System.out.println(";;;;;;;;;;;;;;;;");
 			     User user2= userService.getUser(newLogin.getEmail());
 			     session.setAttribute("user", user2);
 			     boolean isAdmin= false;
-			     if(user2.getRole().getName().equalsIgnoreCase("Admin")) {
+			     if(user2.getRole().getId()==7) {
 			    	 isAdmin=true;
 			     }
+			     System.out.println(isAdmin);
 			     session.setAttribute("user", user2);
-			     session.setAttribute("isAdmin", isAdmin);  
+			     session.setAttribute("isAdmin", isAdmin); 
+		    	 System.out.println(";;;;;;;;;;;;;;;;;");
+		    	 
 			     return "redirect:/home";
 	     	}
 	     }
 @GetMapping("/home")
-public String home(Model model,HttpSession session) {
+public String home(Model model,HttpSession session,Principal principal) {
 	model.addAttribute("user", session.getAttribute("user"));
 	model.addAttribute("isAdmin", session.getAttribute("isAdmin"));
+
+	
 	return "Home.jsp";
 }
 @GetMapping("/logout")
