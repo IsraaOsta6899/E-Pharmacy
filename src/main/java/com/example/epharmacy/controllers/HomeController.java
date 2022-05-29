@@ -1,12 +1,14 @@
 package com.example.epharmacy.controllers;
 
+
+
 import java.lang.ProcessBuilder.Redirect;
 import java.security.Principal;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -46,11 +48,13 @@ public String openLoginPage(Model model) {
 
 @PostMapping("/register")
 public String createNewUser(Model model,@Valid @ModelAttribute("newUser") User newUser,BindingResult result ) {
+	System.out.println("okkkkk");
 	if(result.hasErrors()) {
+		System.out.println("olllll");
 		return "registration.jsp";
 	}
 	else {
-
+		System.out.println("ommmm");
 		userService.register(newUser, result);
 
 		return "redirect:/login";
@@ -71,22 +75,27 @@ public String login(Model model,@Valid @ModelAttribute("newLogin") LoginUser new
 	         return "login.jsp";
 	     }
 	     else {
-	    	 System.out.println("kkkkkkkkkkkkkkkk");
+	    	 System.out.println(";;;;;;;;;;;;;;;;");
 			     User user2= userService.getUser(newLogin.getEmail());
 			     session.setAttribute("user", user2);
 			     boolean isAdmin= false;
-			     if(user2.getRole().getName().equalsIgnoreCase("Admin")) {
+			     if(user2.getRole().getId()==7) {
 			    	 isAdmin=true;
 			     }
+			     System.out.println(isAdmin);
 			     session.setAttribute("user", user2);
-			     session.setAttribute("isAdmin", isAdmin);  
+			     session.setAttribute("isAdmin", isAdmin); 
+		    	 System.out.println(";;;;;;;;;;;;;;;;;");
+		    	 
 			     return "redirect:/home";
 	     	}
 	     }
 @GetMapping("/home")
-public String home(Model model,HttpSession session) {
+public String home(Model model,HttpSession session,Principal principal) {
 	model.addAttribute("user", session.getAttribute("user"));
 	model.addAttribute("isAdmin", session.getAttribute("isAdmin"));
+
+	
 	return "Home.jsp";
 }
 @GetMapping("/logout")
@@ -107,8 +116,9 @@ public String opennRequestPage(Model model) {
 }
   
 @GetMapping("/contactus")
-public String openContactUs(Model model) {
-	
+public String openContactUs(@ModelAttribute("newFeedback") Feedback newFeedback, Model model, HttpSession session) {
+	model.addAttribute("user", session.getAttribute("user"));
+	System.out.println("okkkkk");
 	model.addAttribute("title", "Add Feedback");
 	model.addAttribute("feedback", new Feedback());
 	
@@ -116,15 +126,14 @@ public String openContactUs(Model model) {
 }
 
 @PostMapping("/ContactUs")
-public String contactUs(@ModelAttribute("newFeedback") Feedback newFeedback, Principal principal) {
-	String name = principal.getName();
-	User user2= this.userService.getUserByUserName(name);
+public String contactUs(@ModelAttribute("newFeedback") Feedback newFeedback, HttpSession session) {
+	User user2 = (User) session.getAttribute("user");
 	
 	newFeedback.setUser(user2);
 	
 	user2.getFeedbacks().add(newFeedback);
 	
-	this.userService.save(user2);
+	this.userService.updateUser(user2);
 	
 	System.out.println("FeedBack " + newFeedback);
 	System.out.println("Added to data base");

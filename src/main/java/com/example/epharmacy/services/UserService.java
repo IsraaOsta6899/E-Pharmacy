@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -13,7 +14,7 @@ import com.example.epharmacy.repositories.RoleRepo;
 import com.example.epharmacy.repositories.UserRepo;
 
 @Service
-public class UserService {
+public class UserService  {
 	private final UserRepo userRepo;
 	private final RoleRepo roleRepo;
 	public UserService ( UserRepo userRepo,RoleRepo roleRepo) {
@@ -90,11 +91,20 @@ public class UserService {
 		User user=user1.get();
 		return user;
 	 }
+
 	 
 	 public User getUserByUserName(String name) {
-		Optional<User> user2=   userRepo.findByUserName(name);
-		User user = user2.get();
-		return user;
+		User user2=   userRepo.findByUserName(name);
+		return user2;
+	 }
+
+	 public User findByEmail(String email) {
+		Optional<User> user= userRepo.findByEmail(email);
+		return user.get();
+	 }
+	 
+	 public User updateUser(User user) {
+		 return userRepo.save(user);
 	 }
 	   
 	
