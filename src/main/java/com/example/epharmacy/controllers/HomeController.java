@@ -1,6 +1,7 @@
 package com.example.epharmacy.controllers;
 
 import java.lang.ProcessBuilder.Redirect;
+import java.security.Principal;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -103,6 +104,32 @@ public String openFeedbackPage(Model model) {
 public String opennRequestPage(Model model) {
 	//add all orders
 	return "AllOrders.jsp";
+}
+  
+@GetMapping("/contactus")
+public String openContactUs(Model model) {
+	
+	model.addAttribute("title", "Add Feedback");
+	model.addAttribute("feedback", new Feedback());
+	
+	return "ContactUs.jsp";
+}
+
+@PostMapping("/ContactUs")
+public String contactUs(@ModelAttribute("newFeedback") Feedback newFeedback, Principal principal) {
+	String name = principal.getName();
+	User user2= this.userService.getUserByUserName(name);
+	
+	newFeedback.setUser(user2);
+	
+	user2.getFeedbacks().add(newFeedback);
+	
+	this.userService.save(user2);
+	
+	System.out.println("FeedBack " + newFeedback);
+	System.out.println("Added to data base");
+	
+	return "ContactUs.jsp";
 }
 
 }

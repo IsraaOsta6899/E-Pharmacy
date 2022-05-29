@@ -90,6 +90,12 @@ public class UserService {
 		User user=user1.get();
 		return user;
 	 }
+	 
+	 public User getUserByUserName(String name) {
+		Optional<User> user2=   userRepo.findByUserName(name);
+		User user = user2.get();
+		return user;
+	 }
 	   
 	
 
