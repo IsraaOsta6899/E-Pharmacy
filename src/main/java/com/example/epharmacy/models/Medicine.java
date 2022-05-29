@@ -114,5 +114,12 @@ public class Medicine {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "carts_medicines", 
+        joinColumns = @JoinColumn(name = "medicine_id"), 
+        inverseJoinColumns = @JoinColumn(name = "cart_id")
+    )
+    private List<Cart> carts;
 	
 }

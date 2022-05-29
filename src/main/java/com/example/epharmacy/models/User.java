@@ -3,6 +3,7 @@ package com.example.epharmacy.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
@@ -85,7 +87,15 @@ public class User {
 	    private Date createdAt;
 	    @DateTimeFormat(pattern="yyyy-MM-dd")
 	    private Date updatedAt;
+	    @OneToMany(mappedBy="userr", fetch = FetchType.LAZY)
+	    private List<Order> orders;
 	    
+		public List<Order> getOrders() {
+			return orders;
+		}
+		public void setOrders(List<Order> orders) {
+			this.orders = orders;
+		}
 		public Long getId() {
 			return id;
 		}
@@ -121,6 +131,15 @@ public class User {
 		}
 		public void setPhoneNumber(int phoneNumber) {
 			this.phoneNumber = phoneNumber;
+		}
+		@OneToOne(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	    private  Cart cart;
+
+		public Cart getCart() {
+			return cart;
+		}
+		public void setCart(Cart cart) {
+			this.cart = cart;
 		}
 	    
 }

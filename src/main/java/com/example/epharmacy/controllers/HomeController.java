@@ -98,16 +98,12 @@ public String logout(HttpSession session) {
 	session.invalidate();
 	return "redirect:/";
 }
-@GetMapping("/feedbacks")
-public String openFeedbackPage(Model model) {
-	//to get all feedbacks later
-	return "displayFeedbacks.jsp";
-	
-}
+
 @GetMapping("/requests")
 public String opennRequestPage(Model model) {
-	//add all orders
+	
 	return "AllOrders.jsp";
 }
+
 
 }

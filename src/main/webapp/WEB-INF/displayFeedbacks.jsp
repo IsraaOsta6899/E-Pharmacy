@@ -52,13 +52,14 @@
 			    </tr>
 			  </thead>
 			  <tbody>
+			  <c:forEach var="f"  items="${allFeedbacks}">
 			  <tr>
-			  	<td>1</td>
-			  	<td>1</td>
-			  	<td>1</td>
-			  	<td>1</td>
+			  	<td><c:out value="${f.getId()}"/></td>
+			  	<td><c:out value="${f.getUser().getUserName()}"/></td>
+			  	<td><c:out value="${f.getUser().getEmail()}"/></td>
+			  	<td><c:out value="${f.getMessage()}"/></td>
 			  </tr>
-			
+			</c:forEach>
 		</table>
 </section>
     <footer>
