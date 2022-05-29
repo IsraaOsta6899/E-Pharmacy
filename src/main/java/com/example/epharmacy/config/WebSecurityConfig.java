@@ -27,11 +27,13 @@ private UserDetailsService userDetailsService;
     protected void configure(HttpSecurity http) throws Exception {
         http.
             authorizeRequests()
-                .antMatchers("/images/**","/styles/**", "/script/**", "/Register","/","/register","/Login","/login","/home","/feedbacks","/requests").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/images/**","/styles/**", "/script/**", "/Register","/","/register","/Login","/login","/home","/feedbacks","/requests","/contactus", "/ContactUs").permitAll()
+                // .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
             .formLogin()
                 .loginPage("/login")
+                .defaultSuccessUrl("/home")
                 .permitAll()
                 .and()
             .logout()

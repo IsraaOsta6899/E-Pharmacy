@@ -1,6 +1,9 @@
 package com.example.epharmacy.controllers;
-import java.security.Principal;
 
+
+
+import java.lang.ProcessBuilder.Redirect;
+import java.security.Principal;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -45,11 +48,13 @@ public String openLoginPage(Model model) {
 
 @PostMapping("/register")
 public String createNewUser(Model model,@Valid @ModelAttribute("newUser") User newUser,BindingResult result ) {
+	System.out.println("okkkkk");
 	if(result.hasErrors()) {
+		System.out.println("olllll");
 		return "registration.jsp";
 	}
 	else {
-
+		System.out.println("ommmm");
 		userService.register(newUser, result);
 
 		return "redirect:/login";
@@ -103,6 +108,32 @@ public String logout(HttpSession session) {
 public String opennRequestPage(Model model) {
 	
 	return "AllOrders.jsp";
+}
+  
+@GetMapping("/contactus")
+public String openContactUs(@ModelAttribute("newFeedback") Feedback newFeedback, Model model, HttpSession session) {
+	model.addAttribute("user", session.getAttribute("user"));
+	System.out.println("okkkkk");
+	model.addAttribute("title", "Add Feedback");
+	model.addAttribute("feedback", new Feedback());
+	
+	return "ContactUs.jsp";
+}
+
+@PostMapping("/ContactUs")
+public String contactUs(@ModelAttribute("newFeedback") Feedback newFeedback, HttpSession session) {
+	User user2 = (User) session.getAttribute("user");
+	
+	newFeedback.setUser(user2);
+	
+	user2.getFeedbacks().add(newFeedback);
+	
+	this.userService.updateUser(user2);
+	
+	System.out.println("FeedBack " + newFeedback);
+	System.out.println("Added to data base");
+	
+	return "ContactUs.jsp";
 }
 
 

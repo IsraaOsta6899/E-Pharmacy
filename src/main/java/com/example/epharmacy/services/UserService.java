@@ -91,9 +91,20 @@ public class UserService  {
 		User user=user1.get();
 		return user;
 	 }
+
+	 
+	 public User getUserByUserName(String name) {
+		User user2=   userRepo.findByUserName(name);
+		return user2;
+	 }
+
 	 public User findByEmail(String email) {
 		Optional<User> user= userRepo.findByEmail(email);
 		return user.get();
+	 }
+	 
+	 public User updateUser(User user) {
+		 return userRepo.save(user);
 	 }
 	   
 	
