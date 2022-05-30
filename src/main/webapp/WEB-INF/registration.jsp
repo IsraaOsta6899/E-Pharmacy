@@ -19,8 +19,8 @@
     <header>
         <h3>E-Pharmacy</h3>
         <nav  class="mynav" >
-           <a class="navbar-link" href="#">Login 									| </a> 
-            <a class="navbar-link" href="#">  Sign Up</a>            
+           <a class="navbar-link" href="/login">Login 									| </a> 
+            <a class="navbar-link" href="/Register">  Sign Up</a>            
             
         </nav>
    </header>

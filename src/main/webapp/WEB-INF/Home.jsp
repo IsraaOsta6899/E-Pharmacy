@@ -30,8 +30,11 @@
                 
 				</c:when>    
 			    <c:otherwise>
-				 <img src="images/cart.jpg"   class="cartImage" style="display:block" onclick="toggleText()"></img>
-            	 <a class="navbar-link" href="#">Cart</a>
+			    
+			    
+				<img src="images/cart.jpg"   class="cartImage" style="display:block" onclick="toggleText()"></img>
+				
+            	 <a class="navbar-link" href="/getMyCartItems">Cart</a>
 				</c:otherwise>
 				
 			</c:choose>
@@ -92,9 +95,15 @@
         <h4>Your Cart </h4>
         <hr>
         <div class="selected-items">
-
+		<c:forEach var="item" items="${myMedicines }">
+		<div>
+		<c:out value="${item.getMedicine().getName() }"></c:out>
+		<c:out value="${item.getNumber_of_items() }"></c:out>
+		
+		</div>
+</c:forEach>
         </div>
-        <input type="button" value="sent your order" id="send-order">
+        <a href="/sentOrder/${user.getCart().getId() }"><input type="button" value="sent your order" id="send-order"></a>
 
     </div>
     <script src="/script/scripts.js"></script>

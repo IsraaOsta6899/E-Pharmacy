@@ -16,7 +16,7 @@
 </head>
 <body>
     <header>
-        <h3>E-Pharmacy </h3>
+        <h3>E-Pharmacy</h3>
         <nav  class="mynav" >
             <a class="navbar-link" href="#">HOME</a>
             <a class="navbar-link" href="#">ABOUT </a>
@@ -24,21 +24,25 @@
             <a class="navbar-link" href="#">CONTACT</a><span>|</span> 
             <c:choose>
 			    <c:when test="${isAdmin}">
-            	<a class="navbar-link" href="#">Requests</a>
+            	<a class="navbar-link" href="/requests">Requests</a>
                 <a class="navbar-link" href="#">Add Medicine</a>
-                <a class="navbar-link" href="#">Feedbacks</a>
+                <a class="navbar-link" href="/feedbacks">Feedbacks</a>
                 
 				</c:when>    
 			    <c:otherwise>
-				 <img src="images/cart.jpg"   class="cartImage" style="display:block" onclick="toggleText()"></img>
-            	 <a class="navbar-link" href="#">Cart</a>
+			    
+			    
+				<img src="images/cart.jpg"   class="cartImage" style="display:block" onclick="toggleText()"></img>
+				
+            	 <a class="navbar-link" href="/getMyCartItems">Cart</a>
 				</c:otherwise>
 				
 			</c:choose>
 			<a class="navbar-link" href="/logout">Log out</a>
 			
             
-        </nav>    
+        </nav>
+       
     </header>
 
 <section class="feedbacks">
@@ -52,13 +56,14 @@
 			    </tr>
 			  </thead>
 			  <tbody>
+			  <c:forEach var="f"  items="${allFeedbacks}">
 			  <tr>
-			  	<td>1</td>
-			  	<td>1</td>
-			  	<td>1</td>
-			  	<td>1</td>
+			  	<td><c:out value="${f.getId()}"/></td>
+			  	<td><c:out value="${f.getUser().getUserName()}"/></td>
+			  	<td><c:out value="${f.getUser().getEmail()}"/></td>
+			  	<td><c:out value="${f.getMessage()}"/></td>
 			  </tr>
-			
+			</c:forEach>
 		</table>
 </section>
     <footer>

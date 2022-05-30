@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -39,8 +40,17 @@ public class Order {
     private Date createdAt;
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date updatedAt;
+    @ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="user_id")
+	private User userr;
 	public Date getCreatedAt() {
 		return createdAt;
+	}
+	public User getUserr() {
+		return userr;
+	}
+	public void setUserr(User user) {
+		this.userr = user;
 	}
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;

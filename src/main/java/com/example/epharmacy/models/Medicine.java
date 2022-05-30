@@ -2,6 +2,7 @@ package com.example.epharmacy.models;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -86,7 +87,7 @@ public class Medicine {
 	        inverseJoinColumns = @JoinColumn(name = "order_id")
 	    )
 	    private List<Order> orders;
-	 @ManyToOne(fetch = FetchType.EAGER)
+	 @ManyToOne(fetch = FetchType.LAZY)
 	 @JoinColumn(name="category_id")
 	 private Category category;
 	public List<Order> getOrders() {
@@ -111,8 +112,21 @@ public class Medicine {
 	public Category getCategory() {
 		return category;
 	}
+	public Set<Cart> getCarts() {
+		return carts;
+	}
+	public void setCarts(Set<Cart> carts) {
+		this.carts = carts;
+	}
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "carts_medicines", 
+        joinColumns = @JoinColumn(name = "medicine_id"), 
+        inverseJoinColumns = @JoinColumn(name = "cart_id")
+    )
+    private Set<Cart> carts;
 	
 }
