@@ -28,7 +28,7 @@
        
     </header>
     <div class="homeSection">
-        <img id=aboutUs src="images/aboutus.jpg" id="home"></img>
+        <img id=aboutUs src="images/aboutus.jpg"></img>
     </div>
     <div class="jumbotron jumbotron-fluid page-header"> 
         <div class="container text-center">
@@ -48,7 +48,7 @@
                     <div class="contact-form bg-light rounded p-5">
                         <div id="success"></div>
                         
-                        <form:form action="/ContactUs" method="post" modelAttribute="newFeedback" novalidate="novalidate">
+                        <form:form action="/ContactUs" method="post" modelAttribute="newFeedback" novalidate="novalidate" onsubmit="return ajaxpost()" id="feedBackForm">
                             <div class="form-row">
                                 <div class="col-sm-6 control-group">
                                     <form:input type="text" class="form-control p-4" id="pp-name" path="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />

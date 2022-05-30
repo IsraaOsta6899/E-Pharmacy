@@ -2,13 +2,12 @@ package com.example.epharmacy.controllers;
 
 
 
-import java.lang.ProcessBuilder.Redirect;
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,15 +15,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.epharmacy.models.*;
+import com.example.epharmacy.models.Feedback;
+import com.example.epharmacy.models.LoginUser;
+import com.example.epharmacy.models.User;
+import com.example.epharmacy.services.FeedbackService;
 import com.example.epharmacy.services.UserService;
 
 
 @Controller
 public class HomeController {
 	private final UserService userService;
-	public HomeController( UserService userService) {
+	private final FeedbackService feedbackService;
+	public HomeController( UserService userService, FeedbackService feedbackService) {
 		this.userService=userService;
+		this.feedbackService = feedbackService;
 		
 	}
 @GetMapping("/")
@@ -126,19 +130,25 @@ public String openContactUs(@ModelAttribute("newFeedback") Feedback newFeedback,
 }
 
 @PostMapping("/ContactUs")
-public String contactUs(@ModelAttribute("newFeedback") Feedback newFeedback, HttpSession session) {
+public String contactUs(Model model, @ModelAttribute("newFeedback") Feedback newFeedback, HttpSession session) {
 	User user2 = (User) session.getAttribute("user");
-	
 	newFeedback.setUser(user2);
 	
+	feedbackService.addFeedback(newFeedback);
 	user2.getFeedbacks().add(newFeedback);
 	
+	List<Feedback>allFeedbacks=   user2.getFeedbacks();
+	allFeedbacks.add(newFeedback);
+	user2.setFeedbacks(allFeedbacks);
+	List<Feedback> feedbacks = user2.getFeedbacks();
+	feedbacks.add(newFeedback);
+	user2.setFeedbacks(feedbacks);
 	this.userService.updateUser(user2);
 	
 	System.out.println("FeedBack " + newFeedback);
 	System.out.println("Added to data base");
 	
-	return "ContactUs.jsp";
+	return "FeedbackSucces.jsp";
 }
 
 }

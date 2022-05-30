@@ -41,63 +41,17 @@
         </nav>
        
     </header>
-    <section class="homeSection">
-        <img src="images/pharmacy.jpg" id="home"></img>
+   
+           <div class="container-fluid py-5">
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7">
+                        <h1 class="section-title position-relative text-center mb-5" style="margin-top: 20%;">Your feedback has been sent successfully</h1>
+                         <a href="/home"><button class="btn btn-primary btn-block py-3 px-5" type="submit">Continue Shopping</button></a>
+                    </div>
+                </div>
+                </div>
+               </div>
 
-    </section>
-    <section  class="categorySection">
-        <div class="first">
-            <img src="images/f.png" ></img>
-            <p>name of category</p>
-        </div>
-        <div class="first">
-            <img src="images/s.png" ></img>
-            <p>name of category</p>
-        </div>
-        <div class="first">
-            <img src="images/t.png" ></img>
-            <p>name of category</p>
-        </div>
-        <div class="first">
-            <img src="images/fo.png" ></img>
-            <p>name of category</p>
-        </div>
-    </section>
-    <footer>
-        <h3>E-Pharmacy</h3>
-        <p>I have always striven to fix beauty in wood, stone,<br>
-            glass or pottery, that has been my creed.</p>
-        <div class="contact">
-            <div class="container">
-                <img src="images/email.png" ></img>
-                <p>Email</p>
-                <p>myPharmacy@gmail.com</p>
-
-            </div>
-            <div class="container">
-                <img src="images/location.png" ></img>
-                <p>Location</p>
-                <p>Nablus-Palestine </p>
-
-            </div>
-            <div class="container">
-                <img src="images/phone.png" ></img>
-                <p>Call</p>
-                <p>+970599114657</p>
-
-            </div>
-        </div>
-    </footer>
-    <div class="cart">
-        <h4>Your Cart </h4>
-        <hr>
-        <div class="selected-items">
-
-        </div>
-        <input type="button" value="sent your order" id="send-order">
-
-    </div>
-    <script src="/script/scripts.js"></script>
-         
 </body>
 </html>
