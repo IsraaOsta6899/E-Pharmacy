@@ -144,6 +144,10 @@ display: none;
     flex-direction: column;
     justify-content: space-evenly;
 }
+td button a {
+    color: white;
+    text-decoration: none;
+}
 #send-order{
     width: 70%;
     margin: 0 auto;

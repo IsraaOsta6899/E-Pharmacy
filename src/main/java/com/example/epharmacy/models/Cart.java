@@ -1,6 +1,7 @@
 package com.example.epharmacy.models;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -35,11 +36,17 @@ public class Cart {
 	@OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User user;
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "carts_medicines", 
         joinColumns = @JoinColumn(name = "cart_id"), 
         inverseJoinColumns = @JoinColumn(name = "medicine_id")
     )
-    private List<Medicine> medicines;
+    private Set<Medicine> medicines;
+	public Set<Medicine> getMedicines() {
+		return medicines;
+	}
+	public void setMedicines(Set<Medicine> medicines) {
+		this.medicines = medicines;
+	}
 }

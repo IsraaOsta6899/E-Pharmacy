@@ -26,8 +26,25 @@
             <a class="navbar-link" href="#">ABOUT </a>
             <a class="navbar-link" href="#">SHOP</a>
             <a class="navbar-link" href="#">CONTACT</a><span>|</span> 
-            <img src="images/cart.jpg"   class="cartImage" style="display:block" onclick="toggleText()"></img>
-            <a class="navbar-link" href="#">Cart</a>
+            <c:choose>
+			    <c:when test="${isAdmin}">
+            	<a class="navbar-link" href="/requests">Requests</a>
+                <a class="navbar-link" href="#">Add Medicine</a>
+                <a class="navbar-link" href="/feedbacks">Feedbacks</a>
+                
+				</c:when>    
+			    <c:otherwise>
+			    
+			    
+				<img src="images/cart.jpg"   class="cartImage" style="display:block" onclick="toggleText()"></img>
+				
+            	 <a class="navbar-link" href="/getMyCartItems">Cart</a>
+				</c:otherwise>
+				
+			</c:choose>
+			<a class="navbar-link" href="/logout">Log out</a>
+			
+            
         </nav>
        
     </header>

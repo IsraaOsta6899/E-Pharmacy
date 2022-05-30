@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/styles/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     
@@ -29,8 +29,25 @@
             <a class="navbar-link" href="#">ABOUT </a>
             <a class="navbar-link" href="#">SHOP</a>
             <a class="navbar-link" href="#">CONTACT</a><span>|</span> 
-            <img src="images/cart.jpg"   class="cartImage" style="display:block" onclick="toggleText()"></img>
-            <a class="navbar-link" href="#">Cart</a>
+            <c:choose>
+			    <c:when test="${isAdmin}">
+            	<a class="navbar-link" href="/requests">Requests</a>
+                <a class="navbar-link" href="#">Add Medicine</a>
+                <a class="navbar-link" href="/feedbacks">Feedbacks</a>
+                
+				</c:when>    
+			    <c:otherwise>
+			    
+			    
+				<img src="images/cart.jpg"   class="cartImage" style="display:block" onclick="toggleText()"></img>
+				
+            	 <a class="navbar-link" href="/getMyCartItems">Cart</a>
+				</c:otherwise>
+				
+			</c:choose>
+			<a class="navbar-link" href="/logout">Log out</a>
+			
+            
         </nav>
        
     </header>
@@ -44,22 +61,15 @@
                             <img class="w-100 h-50" style="margin-top: 150px;" src="images/pharmacy.jpg" alt="Image">
                         </div>
                     </div>
-                    <a class="carousel-control-prev" data-slide="prev">
-                        <i class="fa fa-2x fa-angle-left text-dark"></i>
-                    </a>
-                    <a class="carousel-control-next" data-slide="next">
-                        <i class="fa fa-2x fa-angle-right text-dark"></i>
-                    </a>
+                    
                 </div>
             </div>
 
             <div class="col-lg-7 pb-5">
-            	<form:form action="/addToCart" method="post" modelAttribute="addToCart">
-            	<c:forEach items="${medicines}" var="medicine">
-                <h3 class="font-weight-semi-bold">Here is Medicine Name...<c:out value=${"medicine.name"}></c:out></h3>
-                <h3 class="font-weight-semi-bold mb-4">Here is Medicine Price...<c:out value=${"medicine.price"}></c:out></h3>
-                <p class="mb-4">Medicine Description... <c:out value=${"medicine.description"}></c:out></p>
-                </c:forEach>
+            	<form:form action="/addToCart" method="post" modelAttribute="userItem"> 
+                <h3 class="font-weight-semi-bold"><form:label path="name" value="${userItem.getName() }"></form:label><c:out value="${userItem.getName() }"></c:out></h3>
+                <h3 class="font-weight-semi-bold mb-4"><form:label path="price" value="${userItem.getPrice() }"></form:label><c:out value="${userItem.getPrice() }"></c:out></h3>
+                
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">
@@ -67,7 +77,9 @@
                             <i class="fa fa-minus"></i>
                             </button>
                         </div>
-                        <input type="text" class="form-control bg-secondary text-center" value="1">
+                        <form:label path="quantity" value="${userItem.getQuantity() }"></form:label><c:out value="${userItem.getQuantity() }"></c:out>
+                        <form:input path="uQuantity" ></form:input>
+                        
                         <div class="input-group-btn">
                             <button class="btn btn-primary btn-plus">
                                 <i class="fa fa-plus"></i>
@@ -76,8 +88,9 @@
                     </div>
                     <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
                 </div>
+               </form:form>
             </div>
-            </form:form>
+           
         </div>
 
 
@@ -117,7 +130,7 @@
     <script src="mail/contact.js"></script>
 
     <!-- Template Javascript -->
-    <script src="script.js"></script>
+    <script src="/script/scripts.js"></script>
 
     </div>
 </body>

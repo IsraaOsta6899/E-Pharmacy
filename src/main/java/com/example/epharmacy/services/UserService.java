@@ -49,7 +49,7 @@ public class UserService  {
     	String hashed = BCrypt.hashpw(newUser.getPassword(), BCrypt.gensalt());
     	newUser.setPassword(hashed);
     	newUser.setRole(newRole);
-
+    	newUser.setCart(new Cart());
     	userRepo.save(newUser);
     	return newUser;
     	}
