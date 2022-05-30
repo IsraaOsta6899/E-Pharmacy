@@ -3,7 +3,6 @@ package com.example.epharmacy.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
 import org.springframework.stereotype.Service;
 
 import com.example.epharmacy.models.Medicine;

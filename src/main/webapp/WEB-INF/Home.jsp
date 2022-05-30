@@ -20,7 +20,7 @@
         <nav  class="mynav" >
             <a class="navbar-link" href="#">HOME</a>
             <a class="navbar-link" href="#">ABOUT </a>
-            <a class="navbar-link" href="#">SHOP</a>
+            <a class="navbar-link" href="/allmedicines">SHOP</a>
             <a class="navbar-link" href="/contactus">CONTACT</a><span>|</span> 
             <c:choose>
 			    <c:when test="${isAdmin}">

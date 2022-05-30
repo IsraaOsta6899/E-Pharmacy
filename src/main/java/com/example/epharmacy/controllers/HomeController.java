@@ -274,4 +274,19 @@ public String rejectOrder(@PathVariable("id")Long id) {
 	return "redirect:/requests";
 	
 }
+
+@GetMapping("/allmedicines")
+public String allMedicines(HttpSession session , Model model ) {
+	
+	User user2 = (User) session.getAttribute("user");
+	
+	List<Medicine> allMedicines= medicineService.getAllMedicines();
+	for (Medicine medicine : allMedicines) {
+		System.out.println(medicine.getName());
+		System.out.println(medicine.getPrice());
+	}
+	model.addAttribute("allMedicines",allMedicines);
+	return "AllMed.jsp";
+	
+}
 }
