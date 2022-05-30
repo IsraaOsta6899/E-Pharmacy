@@ -26,19 +26,37 @@
 	
     </head>
 <body>
- <header>
+
+<header>
         <h3>E-Pharmacy</h3>
         <nav  class="mynav" >
             <a class="navbar-link" href="/home">HOME</a>
             <a class="navbar-link" href="/aboutUs">ABOUT </a>
             <a class="navbar-link" href="#">SHOP</a>
             <a class="navbar-link" href="/contactus">CONTACT</a><span>|</span> 
-            <img src="images/cart.jpg"   class="cartImage" style="display:block" onclick="toggleText()"></img>
-            <a class="navbar-link" href="#">Cart</a>
+            <c:choose>
+			    <c:when test="${isAdmin}">
+            	<a class="navbar-link" href="/requests">Requests</a>
+                <a class="navbar-link" href="/medicine/new">Add Medicine</a>
+                <a class="navbar-link" href="/feedbacks">Feedbacks</a>
+                
+				</c:when>    
+			    <c:otherwise>
+			    
+			    
+				<img src="images/cart.jpg"   class="cartImage" style="display:block" onclick="toggleText()"></img>
+				
+            	 <a class="navbar-link" href="/getMyCartItems">Cart</a>
+				</c:otherwise>
+				
+			</c:choose>
+			<a class="navbar-link" href="/logout">Log out</a>
+			
+            
         </nav>
        
     </header>
-
+<div class="bg">
     <section >
 <div class = "container-md-fluid m-5 p-5">
 		<div class = "row justify-content-center">
@@ -109,7 +127,7 @@
 
 
     </section>
-
+</div>
 
     <footer>
         <h3>E-Pharmacy</h3>
@@ -117,19 +135,19 @@
             glass or pottery, that has been my creed.</p>
         <div class="contact">
             <div class="container">
-                <img src="images/email.png" ></img>
+                <img src="/images/email.png" ></img>
                 <p>Email</p>
                 <p>myPharmacy@gmail.com</p>
 
             </div>
             <div class="container">
-                <img src="images/location.png" ></img>
+                <img src="/images/location.png" ></img>
                 <p>Location</p>
                 <p>Nablus-Palestine </p>
 
             </div>
             <div class="container">
-                <img src="images/phone.png" ></img>
+                <img src="/images/phone.png" ></img>
                 <p>Call</p>
                 <p>+970599114657</p>
 

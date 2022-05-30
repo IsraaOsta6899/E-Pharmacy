@@ -64,7 +64,7 @@ public class Medicine {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	@NotNull
+	@NotNull(message = "name must be not empty")
 	private String name;
 	@Min(1)
 	private int quantity;

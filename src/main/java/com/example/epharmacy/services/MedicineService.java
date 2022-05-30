@@ -75,7 +75,7 @@ public class MedicineService {
 	 
  
 	 public void delete(Long id) {
-	    	Medicine deleteMed = medicineRepo.findById(id).orElse(null); 
-	    	medicineRepo.delete(deleteMed);
+	    	Optional<Medicine> deleteMed = medicineRepo.findById(id); 
+	    	medicineRepo.delete(deleteMed.get());
 	  	}
 }

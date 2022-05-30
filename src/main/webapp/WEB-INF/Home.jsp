@@ -20,7 +20,7 @@
         <nav  class="mynav" >
             <a class="navbar-link" href="/home">HOME</a>
             <a class="navbar-link" href="/aboutUs">ABOUT </a>
-            <a class="navbar-link" href="#">SHOP</a>
+            <a class="navbar-link" href="/allmedicines">SHOP</a>
             <a class="navbar-link" href="/contactus">CONTACT</a><span>|</span> 
             <c:choose>
 			    <c:when test="${isAdmin}">
@@ -94,11 +94,25 @@
     <div class="cart">
         <h4>Your Cart </h4>
         <hr>
+         <div>
+				 				<img src="images/cart.jpg"   class="cartImage" style="display:block" onclick="toggleText()"></img>
+		
+		<span id="itemName">Name</span>
+		 <span id="itemCount">Quantity</span>
+		 
+		 
+		
+		</div>
         <div class="selected-items">
+       
 		<c:forEach var="item" items="${myMedicines }">
 		<div>
-		<c:out value="${item.getMedicine().getName() }"></c:out>
-		<c:out value="${item.getNumber_of_items() }"></c:out>
+				 				<img src="images/cart.jpg"   class="cartImage" style="display:block" onclick="toggleText()"></img>
+		
+		<span id="itemName"><c:out value="${item.getMedicine().getName() }"></c:out></span>
+		 <span id="itemCount"><c:out value="${item.getNumber_of_items() }"></c:out></span>
+		 
+		 
 		
 		</div>
 </c:forEach>

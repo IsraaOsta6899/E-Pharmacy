@@ -28,3 +28,5 @@
       }
       button.parent().parent().find('input').val(newVal);
   });
+  
+

@@ -9,14 +9,16 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Edit</title>
-<link rel="stylesheet" href="/styles/style.css">
+<link rel="stylesheet" href="/styles/d.css"/>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    
+<link rel="stylesheet" href="/styles/d.css">
     
     
 	<script type="text/javascript" src="js/app.js"></script>
 	<!-- for Bootstrap CSS -->
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <!-- YOUR own local CSS -->
-<link rel="stylesheet" href="/css/main.css"/>
 <!-- For any Bootstrap that uses JS or jQuery-->
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
@@ -32,12 +34,29 @@
             <a class="navbar-link" href="/aboutUs">ABOUT </a>
             <a class="navbar-link" href="#">SHOP</a>
             <a class="navbar-link" href="/contactus">CONTACT</a><span>|</span> 
-            <img src="images/cart.jpg"   class="cartImage" style="display:block" onclick="toggleText()"></img>
-            <a class="navbar-link" href="#">Cart</a>
+            <c:choose>
+			    <c:when test="${isAdmin}">
+            	<a class="navbar-link" href="/requests">Requests</a>
+                <a class="navbar-link" href="/medicine/new">Add Medicine</a>
+                <a class="navbar-link" href="/feedbacks">Feedbacks</a>
+                
+				</c:when>    
+			    <c:otherwise>
+			    
+			    
+				<img src="images/cart.jpg"   class="cartImage" style="display:block" onclick="toggleText()"></img>
+				
+            	 <a class="navbar-link" href="/getMyCartItems">Cart</a>
+				</c:otherwise>
+				
+			</c:choose>
+			<a class="navbar-link" href="/logout">Log out</a>
+			
+            
         </nav>
        
     </header>
-
+    <div class="bg">
        <section >
 
 
@@ -121,7 +140,7 @@
     
     
    
-  
+  </div>
 
     <footer>
         <h3>E-Pharmacy</h3>
@@ -129,19 +148,19 @@
             glass or pottery, that has been my creed.</p>
         <div class="contact">
             <div class="container">
-                <img src="images/email.png" ></img>
+                <img src="/images/email.png" ></img>
                 <p>Email</p>
                 <p>myPharmacy@gmail.com</p>
 
             </div>
             <div class="container">
-                <img src="images/location.png" ></img>
+                <img src="/images/location.png" ></img>
                 <p>Location</p>
                 <p>Nablus-Palestine </p>
 
             </div>
             <div class="container">
-                <img src="images/phone.png" ></img>
+                <img src="/images/phone.png" ></img>
                 <p>Call</p>
                 <p>+970599114657</p>
 

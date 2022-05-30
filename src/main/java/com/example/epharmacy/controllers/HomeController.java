@@ -1,18 +1,11 @@
 package com.example.epharmacy.controllers;
-
-
-
-
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,16 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import com.example.epharmacy.services.*;
 import com.example.epharmacy.models.*;
-import com.example.epharmacy.repositories.OrderRepo;
-import com.example.epharmacy.services.CartMedicineService;
-import com.example.epharmacy.services.CartService;
-import com.example.epharmacy.services.CategoryService;
-import com.example.epharmacy.services.MedicineService;
-import com.example.epharmacy.services.OrderService;
-import com.example.epharmacy.services.UserService;
-
+import com.example.epharmacy.repositories.*;
 
 @Controller
 public class HomeController {
@@ -41,16 +27,23 @@ public class HomeController {
 	private final CartService cartService;
 	private final CartMedicineService cartMedicineService;
 	private final OrderService orderService;
+
     private final CategoryService cateServ;
 
-	public HomeController( UserService userService ,MedicineService medicineService, CartService cartService,CartMedicineService cartMedicineService,OrderService orderService,CategoryService cateServ
-) {
+	private final FeedbackService feedbackService;
+	public HomeController( UserService userService ,CategoryService cateServ,MedicineService medicineService, CartService cartService,CartMedicineService cartMedicineService,OrderService orderService, FeedbackService feedbackService) {
+
 		this.userService=userService;
 		this.medicineService=medicineService;
 		this.cartService=cartService;
 		this.cartMedicineService=cartMedicineService;
 		this.orderService=orderService;
+
 		this.cateServ=cateServ;
+
+		this.feedbackService = feedbackService;
+
+
 		
 	}
 @GetMapping("/")
@@ -121,6 +114,9 @@ public String login(Model model,@Valid @ModelAttribute("newLogin") LoginUser new
 	     }
 @GetMapping("/home")
 public String home(Model model,HttpSession session,Principal principal) {
+	if(session.getAttribute("user")==null) {
+		return "redirect:/login";
+	}
 	User user2 = (User) session.getAttribute("user");
 	List<Carts_Medicines> myMedicines=cartMedicineService.getAllItemsInThisCart(user2.getCart());
 	
@@ -134,12 +130,19 @@ model.addAttribute("myMedicines",myMedicines);
 }
 @GetMapping("/logout")
 public String logout(HttpSession session) {
+	if(session.getAttribute("user")==null) {
+		return "redirect:/login";
+	}
 	session.invalidate();
 	return "redirect:/";
 }
 
 @GetMapping("/requests")
-public String opennRequestPage(Model model) {
+public String opennRequestPage(Model model,HttpSession session) {
+	if(session.getAttribute("user")==null) {
+		return "redirect:/login";
+	}
+	
 	List<Order>allOrders=orderService.getAllOrders();
 	model.addAttribute("AllOeders", allOrders);
 	return "AllOrders.jsp";
@@ -147,6 +150,9 @@ public String opennRequestPage(Model model) {
   
 @GetMapping("/contactus")
 public String openContactUs(@ModelAttribute("newFeedback") Feedback newFeedback, Model model, HttpSession session) {
+	if(session.getAttribute("user")==null) {
+		return "redirect:/login";
+	}
 	model.addAttribute("user", session.getAttribute("user"));
 	System.out.println("okkkkk");
 	model.addAttribute("title", "Add Feedback");
@@ -156,22 +162,34 @@ public String openContactUs(@ModelAttribute("newFeedback") Feedback newFeedback,
 }
 
 @PostMapping("/ContactUs")
-public String contactUs(@ModelAttribute("newFeedback") Feedback newFeedback, HttpSession session) {
+public String contactUs(Model model, @ModelAttribute("newFeedback") Feedback newFeedback, HttpSession session) {
+	if(session.getAttribute("user")==null) {
+		return "redirect:/login";
+	}
 	User user2 = (User) session.getAttribute("user");
-	
 	newFeedback.setUser(user2);
 	
+	feedbackService.addFeedback(newFeedback);
 	user2.getFeedbacks().add(newFeedback);
 	
+	List<Feedback>allFeedbacks=   user2.getFeedbacks();
+	allFeedbacks.add(newFeedback);
+	user2.setFeedbacks(allFeedbacks);
+	List<Feedback> feedbacks = user2.getFeedbacks();
+	feedbacks.add(newFeedback);
+	user2.setFeedbacks(feedbacks);
 	this.userService.updateUser(user2);
 	
 	System.out.println("FeedBack " + newFeedback);
 	System.out.println("Added to data base");
 	
-	return "ContactUs.jsp";
+	return "FeedbackSucces.jsp";
 }
 @GetMapping("/show/{id}")
 public String openItemPage( Model model, HttpSession session,@PathVariable("id")Long id) {
+	if(session.getAttribute("user")==null) {
+		return "redirect:/login";
+	}
 	model.addAttribute("user", session.getAttribute("user"));
 	OrderItem userItem=new OrderItem();
 	Medicine midicine= medicineService.getMedicineById(id);
@@ -191,6 +209,9 @@ public String openItemPage( Model model, HttpSession session,@PathVariable("id")
 }
 @PostMapping("/addToCart")
 public String addItemToUserCart(@Valid@ModelAttribute("userItem")OrderItem userItem,BindingResult result,Model model , HttpSession session ) {
+	if(session.getAttribute("user")==null) {
+		return "redirect:/login";
+	}
 	OrderItem orderItem=userItem;
 	System.out.println(userItem.getName());
 	Medicine d= medicineService.getMedicineByName((String) session.getAttribute("medicinename"));
@@ -234,6 +255,9 @@ public String addItemToUserCart(@Valid@ModelAttribute("userItem")OrderItem userI
 }
 @GetMapping("/getMyCartItems")
 public String getAllItemInCart(HttpSession session , Model model ) {
+	if(session.getAttribute("user")==null) {
+		return "redirect:/login";
+	}
 	User user2 = (User) session.getAttribute("user");
 	List<Carts_Medicines> myMedicines=cartMedicineService.getAllItemsInThisCart(user2.getCart());
 	
@@ -243,7 +267,10 @@ model.addAttribute("myMedicines",myMedicines);
 }
 @RequestMapping("/sentOrder/{id}")
 public String addItemsToOrder(@PathVariable("id")Long cartId,HttpSession session ,Model model) {
-	Order newOrder= new Order();
+	
+	if(session.getAttribute("user")==null) {
+		return "redirect:/login";
+	}Order newOrder= new Order();
 	User user2 = (User) session.getAttribute("user");
 	newOrder.setUserr(user2);
 	int totalPrice=0;
@@ -276,25 +303,46 @@ public String acceptOrder(@PathVariable("id")Long id) {
 }
 
 @RequestMapping("/reject/{id}")
-public String rejectOrder(@PathVariable("id")Long id) {
-	Order deleteOrder= orderService.findOrderById(id);
+public String rejectOrder(@PathVariable("id")Long id,HttpSession session) {
+	
+	if(session.getAttribute("user")==null) {
+		return "redirect:/login";
+	}Order deleteOrder= orderService.findOrderById(id);
 	orderService.deleteOrder(deleteOrder);
 	return "redirect:/requests";
 	
 }
 @GetMapping("/medicine/new")
-public String addMedicine(@ModelAttribute("newMedicine") Medicine newMedicine,Model model) {
+public String addMedicine(@ModelAttribute("newMedicine") Medicine newMedicine,Model model,HttpSession session) {
+	
+	if(session.getAttribute("user")==null) {
+		return "redirect:/login";
+	}
+	User user2 = (User) session.getAttribute("user");
+
+	if(user2.getRole().getId()==1) {
+	
 	List<com.example.epharmacy.models.Category> cateList=cateServ.FindAll();
 	model.addAttribute("cateList", cateList);
-	
+	return "AddMedicine.jsp";
+
+	}
+	else {
+		return "redirect:/";
+	}
 	
    
-return "AddMedicine.jsp";
 }
 
 @PostMapping("/medicine/new")
 public String addMdeicine(@Valid @ModelAttribute("newMedicine") Medicine newMedicine, 
-        BindingResult result )   {
+        BindingResult result,HttpSession session )   {
+	if(session.getAttribute("user")==null) {
+		return "redirect:/login";
+	}
+	User user2 = (User) session.getAttribute("user");
+
+	if(user2.getRole().getId()==1) {
 	if(result.hasErrors()) {
 		System.out.println("helllo");
 		System.out.println(result.hasErrors());
@@ -321,7 +369,10 @@ public String addMdeicine(@Valid @ModelAttribute("newMedicine") Medicine newMedi
 	    
 		return "redirect:/home";
 		
-}
+}}
+	else {
+		return"redirect:/";
+	}
     
 
 
@@ -329,8 +380,15 @@ public String addMdeicine(@Valid @ModelAttribute("newMedicine") Medicine newMedi
 
 
 @GetMapping("/medicine/{id}/edit")
-public String editMedicine( @ModelAttribute("newMedicine") Medicine newMedicine,@PathVariable("id") Long id, Model model) {
-	 Medicine medFound=medicineService.FindMedicine(id);
+public String editMedicine( @ModelAttribute("newMedicine") Medicine newMedicine,@PathVariable("id") Long id, Model model,HttpSession session) {
+	
+	if(session.getAttribute("user")==null) {
+		return "redirect:/login";
+	}
+	User user2 = (User) session.getAttribute("user");
+
+	if(user2.getRole().getId()==1) {
+	Medicine medFound=medicineService.FindMedicine(id);
 	 String date=String.valueOf(medFound.getExpirydate()).split(" ")[0];
 	 System.out.println(date); 
         model.addAttribute("medicine", medFound);
@@ -338,42 +396,79 @@ public String editMedicine( @ModelAttribute("newMedicine") Medicine newMedicine,
     	List<com.example.epharmacy.models.Category> cateList=cateServ.FindAll();
 		model.addAttribute("cateList", cateList);
 
-return "Edit.jsp";
+return "Edit.jsp";}
+	else {
+		return "redirect:/";
+	}
 }
 
-@PutMapping("/medicine/{id}/edit")
-public String editMdeicine(@Valid @ModelAttribute("newMedicine") Medicine newMedicine, 
-        BindingResult result ,@PathVariable("id") Long id) {
+@RequestMapping("/medicine/{id}/edit")
+public String editMdeicine(@Valid @ModelAttribute("newMedicine") Medicine newMedicine,BindingResult result,HttpSession session
+         ,@PathVariable("id") Long id) {
+	if(session.getAttribute("user")==null) {
+		return "redirect:/login";
+	}	
+	User user2 = (User) session.getAttribute("user");
+
+	if(user2.getRole().getId()==1) {
 	if(result.hasErrors()) {
+		
 		System.out.println("helllo");
 		System.out.println(result.hasErrors());
 	return "Edit.jsp";
 		
 	}else {
-		
-//		Long userId=(Long)session.getAttribute("userId");
-//	    User currenUser=userServ.findbyId(userId);
-//	    newMedicine.setUser(currenUser);
-//	    bookServ.createBook(newMedicine);
+
 		
 		System.out.println(newMedicine.toString());
 		medicineService.updateMedicine(id,newMedicine);
 		return "redirect:/home";
 		
-}
+}}
+	else {
+		return "redirect:/";
+	}
     
 
 
 }
 
-@DeleteMapping("/names/{id}/delete")
-public String destroy(@PathVariable("id") Long id) {
+@GetMapping("/names/{id}/delete")
+public String destroy(@PathVariable("id") Long id,HttpSession session) {
+	if(session.getAttribute("user")==null) {
+		return "redirect:/login";
+	}
+	User user2 = (User) session.getAttribute("user");
+System.out.println("ggggggggggggggggggggggggggggggggggggggggggggg");
+	if(user2.getRole().getId()==1) {
 	medicineService.delete(id);
-    return "redirect:/medicine/{id}/edit";
+    return "redirect:/home";
+    }
+	else {
+		return"redirect:/";
+	}
 }
 
 @GetMapping("/aboutUs")
-public String openApoutUsPage() {
+public String openApoutUsPage(HttpSession session) {
+	if(session.getAttribute("user")==null) {
+		return "redirect:/login";
+	}
 	return "AboutUs.jsp";
+}
+
+@GetMapping("/allmedicines")
+public String allMedicines(HttpSession session , Model model ) {
+	
+	User user2 = (User) session.getAttribute("user");
+	
+	List<Medicine> allMedicines= medicineService.getAllMedicines();
+	for (Medicine medicine : allMedicines) {
+		System.out.println(medicine.getName());
+		System.out.println(medicine.getPrice());
+	}
+	model.addAttribute("allMedicines",allMedicines);
+	return "AllMed.jsp";
+	
 }
 }

@@ -28,7 +28,7 @@
             <a class="navbar-link" href="/home">HOME</a>
             <a class="navbar-link" href="/aboutUs">ABOUT </a>
             <a class="navbar-link" href="#">SHOP</a>
-            <a class="navbar-link" href="/contactus">CONTACT</a><span>|</span>  
+            <a class="navbar-link" href="/contactus">CONTACT</a><span>|</span> 
             <c:choose>
 			    <c:when test="${isAdmin}">
             	<a class="navbar-link" href="/requests">Requests</a>
@@ -58,7 +58,7 @@
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner border">
                         <div class="carousel-item active">
-                            <img class="w-100 h-50" style="margin-top: 150px;" src="images/pharmacy.jpg" alt="Image">
+                            <img class="w-100 h-50" style="margin-top: 150px;" src="/images/fo.png" alt="Image">
                         </div>
                     </div>
                     
@@ -67,27 +67,20 @@
 
             <div class="col-lg-7 pb-5">
             	<form:form action="/addToCart" method="post" modelAttribute="userItem"> 
-                <h3 class="font-weight-semi-bold"><form:label path="name" value="${userItem.getName() }"></form:label><c:out value="${userItem.getName() }"></c:out></h3>
-                <h3 class="font-weight-semi-bold mb-4"><form:label path="price" value="${userItem.getPrice() }"></form:label><c:out value="${userItem.getPrice() }"></c:out></h3>
+                <h3 class="font-weight-semi-bold" style="font-family:cursive">Medicine Name:</h3><form:label path="name" value="${userItem.getName() }"></form:label><c:out value="${userItem.getName() }"></c:out>
+                <h3 class="font-weight-semi-bold mb-4" style="font-family:cursive">Medicine Price</h3><form:label path="price" value="${userItem.getPrice() }"></form:label><c:out value="${userItem.getPrice() }"></c:out>
                 
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
-                        <div class="input-group-btn">
-                            <button class="btn btn-primary btn-minus" >
-                            <i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                        <form:label path="quantity" value="${userItem.getQuantity() }"></form:label><c:out value="${userItem.getQuantity() }"></c:out>
-                        <form:input path="uQuantity" ></form:input>
                         
-                        <div class="input-group-btn">
-                            <button class="btn btn-primary btn-plus">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </div>
+                       <h3 class="font-weight-semi-bold mb-4" style="font-family:cursive">Availabel Count</h3> <form:label path="quantity" value="${userItem.getQuantity() }"></form:label><c:out value="${userItem.getQuantity() }"></c:out>
+                        <h3 class="font-weight-semi-bold mb-4" style="font-family:cursive">Quantity You Want</h3><form:input path="uQuantity" ></form:input>
+                        
+                        
                     </div>
-                    <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
                 </div>
+                                    <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                
                </form:form>
             </div>
            
@@ -100,19 +93,19 @@
             glass or pottery, that has been my creed.</p>
         <div class="contact">
             <div class="container">
-                <img src="images/email.png" ></img>
+                <img src="/images/email.png" ></img>
                 <p>Email</p>
                 <p>myPharmacy@gmail.com</p>
 
             </div>
             <div class="container">
-                <img src="images/location.png" ></img>
+                <img src="/images/location.png" ></img>
                 <p>Location</p>
                 <p>Nablus-Palestine </p>
 
             </div>
             <div class="container">
-                <img src="images/phone.png" ></img>
+                <img src="/images/phone.png" ></img>
                 <p>Call</p>
                 <p>+970599114657</p>
 
