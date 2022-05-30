@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
 import org.springframework.stereotype.Service;
 
+import com.example.epharmacy.models.Category;
 import com.example.epharmacy.models.Medicine;
 import com.example.epharmacy.repositories.MedicineRepo;
 
@@ -70,7 +71,9 @@ public class MedicineService {
 		 return medicineRepo.save(b);
 		 
 	 }
-	 
+	 public List<Medicine>getAllMedicinesInCat(Category category){
+		 return medicineRepo.findByCategory(category);
+	 }
 	 
 	 
  

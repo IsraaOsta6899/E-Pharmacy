@@ -50,19 +50,19 @@
     </section>
     <section  class="categorySection">
         <div class="first">
-            <img src="images/f.png" ></img>
+            <a href="/allmedicinesInCat/1"><img src="images/f.png" ></img></a>
             <p>name of category</p>
         </div>
         <div class="first">
-            <img src="images/s.png" ></img>
+           <a href="/allmedicinesInCat/2"> <img src="images/s.png" ></img></a>
             <p>name of category</p>
         </div>
         <div class="first">
-            <img src="images/t.png" ></img>
+           <a href="/allmedicinesInCat/3"> <img src="images/t.png" ></img></a>
             <p>name of category</p>
         </div>
         <div class="first">
-            <img src="images/fo.png" ></img>
+            <a href="/allmedicinesInCat/4"><img src="images/fo.png" ></img></a>
             <p>name of category</p>
         </div>
     </section>

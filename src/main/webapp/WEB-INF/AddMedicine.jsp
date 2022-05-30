@@ -62,7 +62,7 @@
 		<div class = "row justify-content-center">
 			<div class = "col-5 align-self-center">
 			<h1>Add New Medicine</h1>
-			<form:form action="/medicine/new" method="post" modelAttribute="newMedicine" >
+			<form:form action="/medicine/new" method="post" modelAttribute="newMedicine" enctype="multipart/form-data">
 				<div>
 		 			<form:label path="name" for="floatingInput">Name</form:label>
 				    <form:input path="name" class="form-control" name = "name" id="floatingInput"   />
@@ -116,6 +116,12 @@
                 </div>
                 
               <br>
+              <div>
+     
+				    <label>Photos: </label>
+				    <input type="file" name="image" accept="image/png, image/jpeg" />
+				     
+    			</div>
 				<button type="submit" class="btn btn-info">Add Medicine</button>
 			</form:form>
 			</div>

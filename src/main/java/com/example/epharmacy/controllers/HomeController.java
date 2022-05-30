@@ -1,4 +1,5 @@
 package com.example.epharmacy.controllers;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +18,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.example.epharmacy.services.*;
+import com.example.epharmacy.fil.FileUploadUtil;
 import com.example.epharmacy.models.*;
 import com.example.epharmacy.repositories.*;
 
@@ -336,7 +342,7 @@ public String addMedicine(@ModelAttribute("newMedicine") Medicine newMedicine,Mo
 
 @PostMapping("/medicine/new")
 public String addMdeicine(@Valid @ModelAttribute("newMedicine") Medicine newMedicine, 
-        BindingResult result,HttpSession session )   {
+        BindingResult result,HttpSession session, @RequestParam("image") MultipartFile multipartFile) throws IOException{
 	if(session.getAttribute("user")==null) {
 		return "redirect:/login";
 	}
@@ -358,14 +364,14 @@ public String addMdeicine(@Valid @ModelAttribute("newMedicine") Medicine newMedi
 //	    bookServ.createBook(newMedicine);
 		
 	      
-//        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-//        newMedicine.setPhotos(fileName);
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        newMedicine.setPhotos(fileName);
 //		newMedicine.setExpirydate(new SimpleDateFormat("dd/MM/yyyy").parse(newMedicine.getExpirydate())); 
 		medicineService.createMedicine(newMedicine);
 //		
-//	    String uploadDir = "medicine-photos/" + newMedicine.getId();
-//	       
-//	    FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+	    String uploadDir = "medicine-photos/" + newMedicine.getId();
+	       
+	    FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 	    
 		return "redirect:/home";
 		
@@ -469,6 +475,21 @@ public String allMedicines(HttpSession session , Model model ) {
 	}
 	model.addAttribute("allMedicines",allMedicines);
 	return "AllMed.jsp";
+	
+}
+
+@GetMapping("/allmedicinesInCat/{id}")
+public String allMedicinesInCat(HttpSession session , Model model,@PathVariable("id") Long id) {
+	
+	User user2 = (User) session.getAttribute("user");
+	Category category= cateServ.getCategory(id);
+	List<Medicine> allMedicines= medicineService.getAllMedicinesInCat(category);
+	for (Medicine medicine : allMedicines) {
+		System.out.println(medicine.getName());
+		System.out.println(medicine.getPrice());
+	}
+	model.addAttribute("allMedicines",allMedicines);
+	return "AllAnimalInCategory.jsp";
 	
 }
 }

@@ -15,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -74,7 +75,21 @@ public class Medicine {
 	private boolean prescription;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date expirydate;
-    // This will not allow the createdAt column to be updated after creation
+	@Column(nullable = true, length = 64)
+    private String photos;
+    public String getPhotos() {
+		return photos;
+	}
+    @Transient
+    public String getPhotosImagePath() {
+        if (photos == null || id == null) return null;
+         
+        return "/medicine-photos/" + id + "/" + photos;
+    }
+	public void setPhotos(String photos) {
+		this.photos = photos;
+	}
+	// This will not allow the createdAt column to be updated after creation
     @Column(updatable=false)
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createdAt;

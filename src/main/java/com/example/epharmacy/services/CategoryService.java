@@ -2,7 +2,7 @@ package com.example.epharmacy.services;
 
 
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +37,10 @@ public class CategoryService {
 	 public Category createMedicine(Category b) {
 		 return cateRepo.save(b);
 	 }
-	 
+	 public Category getCategory(Long id) {
+		 Optional<Category> category= cateRepo.findById(id);
+		 return category.get();
+	 }
 //	 public Medicine updateBook(Medicine book) {
 //		 Medicine med1 = medRepo.findById(book.getId()).orElse(null);
 //	        assert med1!=null;

@@ -50,7 +50,7 @@
        
     </header>
         <div class="homeSection">
-            <img id=aboutUs src="images/aboutus.jpg"></img>
+            <img id=aboutUs src="/images/aboutus.jpg"></img>
         </div>
     
     <!-- Header End -->
@@ -89,19 +89,19 @@
             glass or pottery, that has been my creed.</p>
         <div class="contact">
             <div class="container">
-                <img src="images/email.png" ></img>
+                <img src="/images/email.png" ></img>
                 <p>Email</p>
                 <p>myPharmacy@gmail.com</p>
 
             </div>
             <div class="container">
-                <img src="images/location.png" ></img>
+                <img src="/images/location.png" ></img>
                 <p>Location</p>
                 <p>Nablus-Palestine </p>
 
             </div>
             <div class="container">
-                <img src="images/phone.png" ></img>
+                <img src="/images/phone.png" ></img>
                 <p>Call</p>
                 <p>+970599114657</p>
 
