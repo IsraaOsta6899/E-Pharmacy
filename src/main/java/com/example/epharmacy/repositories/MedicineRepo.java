@@ -11,5 +11,6 @@ import com.example.epharmacy.models.Medicine;
 public interface MedicineRepo extends CrudRepository<Medicine, Long> {
 	List<Medicine>findAll();
 	Medicine findByName(String name);
+	List<Medicine> findById(Medicine id);
 
 }

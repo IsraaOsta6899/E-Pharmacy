@@ -16,16 +16,19 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.epharmacy.models.*;
 import com.example.epharmacy.repositories.OrderRepo;
 import com.example.epharmacy.services.CartMedicineService;
 import com.example.epharmacy.services.CartService;
+import com.example.epharmacy.services.CategoryService;
 import com.example.epharmacy.services.MedicineService;
 import com.example.epharmacy.services.OrderService;
 import com.example.epharmacy.services.UserService;
@@ -38,12 +41,16 @@ public class HomeController {
 	private final CartService cartService;
 	private final CartMedicineService cartMedicineService;
 	private final OrderService orderService;
-	public HomeController( UserService userService ,MedicineService medicineService, CartService cartService,CartMedicineService cartMedicineService,OrderService orderService) {
+    private final CategoryService cateServ;
+
+	public HomeController( UserService userService ,MedicineService medicineService, CartService cartService,CartMedicineService cartMedicineService,OrderService orderService,CategoryService cateServ
+) {
 		this.userService=userService;
 		this.medicineService=medicineService;
 		this.cartService=cartService;
 		this.cartMedicineService=cartMedicineService;
 		this.orderService=orderService;
+		this.cateServ=cateServ;
 		
 	}
 @GetMapping("/")
@@ -274,5 +281,99 @@ public String rejectOrder(@PathVariable("id")Long id) {
 	orderService.deleteOrder(deleteOrder);
 	return "redirect:/requests";
 	
+}
+@GetMapping("/medicine/new")
+public String addMedicine(@ModelAttribute("newMedicine") Medicine newMedicine,Model model) {
+	List<com.example.epharmacy.models.Category> cateList=cateServ.FindAll();
+	model.addAttribute("cateList", cateList);
+	
+	
+   
+return "AddMedicine.jsp";
+}
+
+@PostMapping("/medicine/new")
+public String addMdeicine(@Valid @ModelAttribute("newMedicine") Medicine newMedicine, 
+        BindingResult result )   {
+	if(result.hasErrors()) {
+		System.out.println("helllo");
+		System.out.println(result.hasErrors());
+	return "AddMedicine.jsp";
+		
+	}else {
+		
+
+		
+//		Long userId=(Long)session.getAttribute("userId");
+//	    User currenUser=userServ.findbyId(userId);
+//	    newMedicine.setUser(currenUser);
+//	    bookServ.createBook(newMedicine);
+		
+	      
+//        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+//        newMedicine.setPhotos(fileName);
+//		newMedicine.setExpirydate(new SimpleDateFormat("dd/MM/yyyy").parse(newMedicine.getExpirydate())); 
+		medicineService.createMedicine(newMedicine);
+//		
+//	    String uploadDir = "medicine-photos/" + newMedicine.getId();
+//	       
+//	    FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+	    
+		return "redirect:/home";
+		
+}
+    
+
+
+}
+
+
+@GetMapping("/medicine/{id}/edit")
+public String editMedicine( @ModelAttribute("newMedicine") Medicine newMedicine,@PathVariable("id") Long id, Model model) {
+	 Medicine medFound=medicineService.FindMedicine(id);
+	 String date=String.valueOf(medFound.getExpirydate()).split(" ")[0];
+	 System.out.println(date); 
+        model.addAttribute("medicine", medFound);
+        model.addAttribute("date", date);
+    	List<com.example.epharmacy.models.Category> cateList=cateServ.FindAll();
+		model.addAttribute("cateList", cateList);
+
+return "Edit.jsp";
+}
+
+@PutMapping("/medicine/{id}/edit")
+public String editMdeicine(@Valid @ModelAttribute("newMedicine") Medicine newMedicine, 
+        BindingResult result ,@PathVariable("id") Long id) {
+	if(result.hasErrors()) {
+		System.out.println("helllo");
+		System.out.println(result.hasErrors());
+	return "Edit.jsp";
+		
+	}else {
+		
+//		Long userId=(Long)session.getAttribute("userId");
+//	    User currenUser=userServ.findbyId(userId);
+//	    newMedicine.setUser(currenUser);
+//	    bookServ.createBook(newMedicine);
+		
+		System.out.println(newMedicine.toString());
+		medicineService.updateMedicine(id,newMedicine);
+		return "redirect:/home";
+		
+}
+    
+
+
+}
+
+@DeleteMapping("/names/{id}/delete")
+public String destroy(@PathVariable("id") Long id) {
+	medicineService.delete(id);
+    return "redirect:/medicine/{id}/edit";
+}
+
+@GetMapping("/aboutUs")
+public String openApoutUsPage() {
+	return "AboutUs.jsp";
 }
 }

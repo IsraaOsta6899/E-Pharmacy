@@ -18,14 +18,14 @@
     <header>
         <h3>E-Pharmacy</h3>
         <nav  class="mynav" >
-            <a class="navbar-link" href="#">HOME</a>
-            <a class="navbar-link" href="#">ABOUT </a>
+            <a class="navbar-link" href="/home">HOME</a>
+            <a class="navbar-link" href="/aboutUs">ABOUT </a>
             <a class="navbar-link" href="#">SHOP</a>
-            <a class="navbar-link" href="#">CONTACT</a><span>|</span> 
+            <a class="navbar-link" href="/contactus">CONTACT</a><span>|</span> 
             <c:choose>
 			    <c:when test="${isAdmin}">
             	<a class="navbar-link" href="/requests">Requests</a>
-                <a class="navbar-link" href="#">Add Medicine</a>
+                <a class="navbar-link" href="/medicine/new">Add Medicine</a>
                 <a class="navbar-link" href="/feedbacks">Feedbacks</a>
                 
 				</c:when>    

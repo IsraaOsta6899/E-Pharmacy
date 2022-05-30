@@ -72,7 +72,7 @@ public class Medicine {
 	private float price;
 	@NotNull
 	private boolean prescription;
-	@DateTimeFormat
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date expirydate;
     // This will not allow the createdAt column to be updated after creation
     @Column(updatable=false)
