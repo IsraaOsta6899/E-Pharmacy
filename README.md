@@ -20,8 +20,9 @@ So we decided to build a website to help the pharmacy owner to display the medic
 
 
 # Project Features
-* At the beggining our website have two levels of user (Admin  , Normal User)
-* Normal user features , every user can create his own account and login to see all mediciens in the website.
+* At the beggining our website have two levels of user (Admin and Normal User).
+* Once the website is accessed by the normal user, the user would be redirected to the home page of our website where there is an option to register or login.  
+* Normal user has many features, such as every user can create his own account and then login in order to have a full accessibility to our website to see all mediciens in the website.
 * The admin only can add, delete, and edit his medicine to sell it by providing information and image to another user. When user makes an order, a request message will be sent to the admin either to accept ot reject it.
 * The user has the ability to provide the admin with a specific feedback.
 * Each user has his own cart to add as many medicines that he wants, and then he can send his order to the admin either to accpect or reject it. 
