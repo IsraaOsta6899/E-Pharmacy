@@ -29,6 +29,6 @@ So we decided to build a website to help the pharmacy owner to display the medic
 * Finally we divide medicines in categories to help people to choose from specific category.
 
 
-<img src="[/repository/assets/employee.png](https://github.com/IsraaOsta6899/image/blob/master/Home.PNG)">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/Home.PNG">
 
 
