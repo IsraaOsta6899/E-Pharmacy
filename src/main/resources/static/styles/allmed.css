@@ -1,4 +1,6 @@
+
 @charset "ISO-8859-1";
+
 :root {
     --bs-primary-rgb: 13,110,253;
 }
@@ -24,6 +26,7 @@ header{
     justify-content: space-around;
     
 }
+
 
 .py-5 {
     padding-top: 3rem!important;
@@ -53,13 +56,14 @@ header{
     margin-left: calc(-.5 * var(--bs-gutter-x));
     width: 33%;
 }
+
 .navbar-link{
     text-decoration: none;
     font-family: cursive;
     color: #828282;
     font-size: smaller;
     font-weight: normal;
-    
+
 
 }
 h3{

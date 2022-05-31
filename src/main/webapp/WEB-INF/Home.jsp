@@ -18,8 +18,10 @@
     <header>
         <h3>E-Pharmacy</h3>
         <nav  class="mynav" >
+
             <a class="navbar-link" href="/home">HOME</a>
             <a class="navbar-link" href="/aboutUs">ABOUT </a>
+
             <a class="navbar-link" href="/allmedicines">SHOP</a>
             <a class="navbar-link" href="/contactus">CONTACT</a><span>|</span> 
             <c:choose>

@@ -23,6 +23,7 @@
     <header>
         <h3>E-Pharmacy</h3>
         <nav  class="mynav" >
+
             <a class="navbar-link" href="/home">HOME</a>
             <a class="navbar-link" href="/aboutUs">ABOUT </a>
             <a class="navbar-link" href="/allmedicines">SHOP</a>
@@ -31,10 +32,12 @@
 			    <c:when test="${isAdmin}">
             	<a class="navbar-link" href="/requests">Requests</a>
                 <a class="navbar-link" href="/medicine/new">Add Medicine</a>
+
                 <a class="navbar-link" href="/feedbacks">Feedbacks</a>
                 
 				</c:when>    
 			    <c:otherwise>
+			   
 			    
 			    
 				<img src="images/cart.jpg"   class="cartImage" style="display:block" onclick="toggleText()"></img>
@@ -52,11 +55,22 @@
         <div class="homeSection">
             <img id=aboutUs src="images/aboutus.jpg"></img>
         </div>
-    
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container text-center py-5" >
+            <h1 class="text-black display-5" style="margin-top: -27%;">Product</h1>
+            <div class="d-inline-flex align-items-center text-black">
+                <i class="fa fa-circle px-3"></i>
+                <p class="m-0"><a class="text-black" href="/home">Home</a></p>
+            </div>
+        </div>
+    </div>
+
     <!-- Header End -->
 
 
     <!-- Products Start -->
+
     <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <h1 class="section-title position-relative text-center mb-5" style="text-align:center">All Medicines Available</h1>
@@ -76,6 +90,7 @@
                             <img class="rounded-circle w-100 h-100" src="/medicine-photos/${medicine.getId()}/${medicine.getPhotos()}" style="object-fit: cover;">
                         </div><br><br>
                         <h5 class="font-weight-bold mb-4"><c:out value="${medicine.getName() }"></c:out></h5>
+
                         <a href="/show/${medicine.getId()}" class="btn btn-sm btn-secondary">More Info</a>
                     </div>
                 </div>
