@@ -27,7 +27,7 @@ private UserDetailsService userDetailsService;
     protected void configure(HttpSecurity http) throws Exception {
         http.
             authorizeRequests()
-                .antMatchers("/images/**","/styles/**", "/script/**","/show/{id}", "/Register","/","/register","/Login","/login","/home","/feedbacks","/requests","/contactus", "/ContactUs").permitAll()
+                .antMatchers("/images/**","/styles/**", "/script/**","/show/{id}", "/Register","/","/register","/Login","/login","/home","/feedbacks","/requests","/names/{id}/delete","/contactus", "/ContactUs").permitAll()
                 // .anyRequest().authenticated()
                 .anyRequest().permitAll()
                 .and()

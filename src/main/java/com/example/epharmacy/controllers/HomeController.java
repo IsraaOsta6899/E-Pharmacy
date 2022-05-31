@@ -439,7 +439,7 @@ public String editMdeicine(@Valid @ModelAttribute("newMedicine") Medicine newMed
 
 }
 
-@GetMapping("/names/{id}/delete")
+@RequestMapping("/names/{id}/delete")
 public String destroy(@PathVariable("id") Long id,HttpSession session) {
 	if(session.getAttribute("user")==null) {
 		return "redirect:/login";

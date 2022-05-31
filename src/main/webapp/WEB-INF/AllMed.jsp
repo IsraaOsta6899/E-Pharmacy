@@ -23,14 +23,14 @@
     <header>
         <h3>E-Pharmacy</h3>
         <nav  class="mynav" >
-            <a class="navbar-link" href="#">HOME</a>
-            <a class="navbar-link" href="#">ABOUT </a>
-            <a class="navbar-link" href="#">SHOP</a>
-            <a class="navbar-link" href="#">CONTACT</a><span>|</span> 
+            <a class="navbar-link" href="/home">HOME</a>
+            <a class="navbar-link" href="/aboutUs">ABOUT </a>
+            <a class="navbar-link" href="/allmedicines">SHOP</a>
+            <a class="navbar-link" href="/contactus">CONTACT</a><span>|</span> 
             <c:choose>
 			    <c:when test="${isAdmin}">
             	<a class="navbar-link" href="/requests">Requests</a>
-                <a class="navbar-link" href="#">Add Medicine</a>
+                <a class="navbar-link" href="/medicine/new">Add Medicine</a>
                 <a class="navbar-link" href="/feedbacks">Feedbacks</a>
                 
 				</c:when>    
@@ -72,9 +72,9 @@
                         <div class="bg-primary mt-n5 py-3" style="width: 80px;">
                             <h4 class="font-weight-bold text-black mb-0"><c:out value="${medicine.getPrice() }"></c:out>$$$</h4>
                         </div>
-                        <div class="position-relative bg-primary rounded-circle mt-n3 mb-4 p-3" style="width: 150px; height: 150px;">
+                        <div class="" style="width: 150px; height: 150px;">
                             <img class="rounded-circle w-100 h-100" src="/medicine-photos/${medicine.getId()}/${medicine.getPhotos()}" style="object-fit: cover;">
-                        </div>
+                        </div><br><br>
                         <h5 class="font-weight-bold mb-4"><c:out value="${medicine.getName() }"></c:out></h5>
                         <a href="/show/${medicine.getId()}" class="btn btn-sm btn-secondary">More Info</a>
                     </div>
