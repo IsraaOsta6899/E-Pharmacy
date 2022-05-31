@@ -202,6 +202,13 @@ display: none
   background-repeat: no-repeat;
   background-size: cover;
 }
+#quote{
+	font-family:cursive;
+	color:green;
+	margin-left:5%;
+	text-align:center;
+	margin-bottom:5%;
+}
 #itemCount{
 	color:green;
 	border: 3px solid #008000;

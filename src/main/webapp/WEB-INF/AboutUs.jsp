@@ -13,9 +13,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
         <link rel="preconnect" href="https://fonts.gstatic.com">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        
 
 </head>
 <body>
@@ -145,6 +147,12 @@
             </div>
         </div>
     </div>
+    
+    <div id="quote">
+    <h1>Our Values</h1>
+    <p id="quote-text" class="lead"></p>
+    <p id="quote-author" class="lead"></p>
+    </div>
     <!-- Team End -->
 
     <footer>
@@ -172,3 +180,27 @@
             </div>
         </div>
     </footer>
+    <script >
+   console.log("**")
+  var i=Math.floor(Math.random() *100);
+
+const settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "https://type.fit/api/quotes",
+          "method": "GET"
+        }
+
+        $.ajax(settings).done(function (response) {
+          const data = JSON.parse(response);
+          console.log(data[i].text);
+          $("#quote-text").append(data[i].text);
+          $("#quote-author").append(data[i].author);
+
+
+        });
+
+</script>
+
+ </body>
+ </html>
