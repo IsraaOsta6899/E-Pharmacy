@@ -32,20 +32,23 @@ So we decided to build a website to help the pharmacy owner to display the medic
 <img src="https://github.com/IsraaOsta6899/image/blob/master/Capture.PNG">
 
 #some photos to our project
-<img src="https://github.com/IsraaOsta6899/image/blob/master/Capture.PNG">
-<img src="https://github.com/IsraaOsta6899/image/blob/master/about.PNG">
-<img src="https://github.com/IsraaOsta6899/image/blob/master/addme.PNG">
-<img src="https://github.com/IsraaOsta6899/image/blob/master/addvalidation.PNG">
-<img src="https://github.com/IsraaOsta6899/image/blob/master/afterfeed.PNG">
-<img src="https://github.com/IsraaOsta6899/image/blob/master/allmedicines.PNG">
-<img src="https://github.com/IsraaOsta6899/image/blob/master/allmedicines.PNG">
-
-<img src="https://github.com/IsraaOsta6899/image/blob/master/cart.PNG">
-
-<img src="https://github.com/IsraaOsta6899/image/blob/master/contact.PNG">
-<img src="https://github.com/IsraaOsta6899/image/blob/master/edot.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/Home.PNG">
 <img src="https://github.com/IsraaOsta6899/image/blob/master/signup.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/login.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/welcome.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/cart.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/about.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/contact.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/afterfeed.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/addme.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/requests.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/addvalidation.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/allmedicines.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/allmedicines.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/edot.PNG">
 <img src="https://github.com/IsraaOsta6899/image/blob/master/someValidations.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/validation.PNG">
+
 
 
 
