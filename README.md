@@ -27,8 +27,28 @@ So we decided to build a website to help the pharmacy owner to display the medic
 * The user has the ability to provide the admin with a specific feedback.
 * Each user has his own cart to add as many medicines that he wants, and then he can send his order to the admin either to accpect or reject it. 
 * Finally we divide medicines in categories to help people to choose from specific category.
-
+#ERD Diagram
 
 <img src="https://github.com/IsraaOsta6899/image/blob/master/Capture.PNG">
+
+#some photos to our project
+<img src="https://github.com/IsraaOsta6899/image/blob/master/Capture.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/about.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/addme.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/addvalidation.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/afterfeed.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/allmedicines.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/allmedicines.PNG">
+
+<img src="https://github.com/IsraaOsta6899/image/blob/master/cart.PNG">
+
+<img src="https://github.com/IsraaOsta6899/image/blob/master/contact.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/edot.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/signup.PNG">
+<img src="https://github.com/IsraaOsta6899/image/blob/master/someValidations.PNG">
+
+
+
+
 
 
